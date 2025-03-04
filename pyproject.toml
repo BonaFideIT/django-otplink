@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+dynamic = ["version"]
+name="django-otplink"
+description="Generate one-time or multi-use links with expiry and temporary file management support"
+requires-python = ">= 3.11"
+dependencies = [
+    "django>=4.2",
+    "django-downloadview",
+    "requests"
+]
+authors = [
+  {name = "Oguzhan Kaluk", email = "okaluk@bona-fide.it"},
+  {name = "Olaf Rühenbeck", email = "oruehenbeck@bona-fide.it"},
+]
+maintainers = [
+  {name = "Olaf Rühenbeck", email = "oruehenbeck@bona-fide.it"}
+]
+readme="README.md"
+license = {text = "MIT License"}
+keywords = ["django", "otp", "link", "download"]
+
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Topic :: Software Development :: OneTimePad Link",
+
+  # Pick your license as you wish (see also "license" above)
+  "License :: OSI Approved :: MIT License",
+
+  # Specify the Python versions you support here.
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+]
+
+[project.urls]
+Homepage = "https://bona-fide.it/"
