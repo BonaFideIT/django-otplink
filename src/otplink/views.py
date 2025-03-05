@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from .models import OtpLink
+from django_downloadview.views import ObjectDownloadView
 
-# Create your views here.
+
+class OTPDownloadView(ObjectDownloadView):
+    """
+    Serve file fields from models.
+    """
+
+    model = OtpLink
