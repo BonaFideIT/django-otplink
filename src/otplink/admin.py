@@ -1,6 +1,9 @@
 from django.contrib import admin
-from .models import OtpLink
+from .models import OtpObject
 
 # Register your models here.
+admin.site.register(OtpObject)
 
-admin.site.register(OtpLink)
+# todo Delete Me
+from .models import TestClass
+admin.site.register(TestClass)

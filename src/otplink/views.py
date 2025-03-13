@@ -1,24 +1,20 @@
-from django.http.response import HttpResponse
-from django.views.generic.base import View
-
-from .models import OtpLink, TestClass
 from django_downloadview.views import ObjectDownloadView
-
-from .functions import create_otp_link
+from .functions import retrieve_otp_link_instance
+from .models import OtpObject
 
 
 class OTPDownloadView(ObjectDownloadView):
     """
     Serve file fields from models.
     """
+    model = OtpObject
 
-    model = OtpLink
+    def get_object(self, queryset=None):
+        # get OtpObject Instance
+        obj = super().get_object(queryset)
 
+        # overwrite ObjectDownloadView attributes from OtpObject
+        self.file_field = obj.file_field
 
-# TODO Delete me
-class TestView(View):
-
-
-    def get(self):
-        create_otp_link(TestClass.objects.get(pk=1), 'file')
-        return HttpResponse('Hello World')
+        # return instance of model specified in OtpObject
+        return retrieve_otp_link_instance(obj)

@@ -1,13 +1,9 @@
 from django.apps import apps
 
-from src.otplink.models import OtpLink
+from .models import OtpObject
 
 
 def create_otp_link(instance, file_field: str, quantity: int=1, duration: int=24) -> str | None:
-    pass
-
-    return None
-
     # check if filefield exists in the instancemodel
     if not hasattr(instance, file_field):
         return None
@@ -25,11 +21,17 @@ def create_otp_link(instance, file_field: str, quantity: int=1, duration: int=24
         return None
 
     # create the otp link
-    otp, created = OtpLink.objects.create(
+    otp = OtpObject.objects.create(
+        app_name=app_name,
+        model_name=model_name,
+        instance_id=instance.pk,
+        file_field=file_field,
         quantity=quantity,
         duration=duration,
     )
 
-    if created:
-        return otp.get_absolute_url()
-    return None
+    return otp.get_absolute_url()
+
+def retrieve_otp_link_instance(otp_object: OtpObject):
+    model = apps.get_model(otp_object.app_name, otp_object.model_name)
+    return model.objects.get(pk=otp_object.instance_id)
