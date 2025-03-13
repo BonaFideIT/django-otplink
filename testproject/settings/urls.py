@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from otplink.views import OTPDownloadView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('otp-link/<uuid:pk>/', OTPDownloadView.as_view(), name='otp-link'),
 ]
