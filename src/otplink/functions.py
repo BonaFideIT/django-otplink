@@ -4,10 +4,10 @@ from django.http.response import Http404
 from .models import OtpObject
 
 
-def create_otp_link(instance, file_field: str, quantity: int=1, duration: int=24) -> str | None:
+def create_otp_link(instance, file_field: str, quantity: int=1, duration: int=24) -> OtpObject:
     # check if filefield exists in the instancemodel
     if not hasattr(instance, file_field):
-        return None
+        raise AttributeError(f'{instance.__class__.__name__} has no attribute {file_field}')
 
     # create the otp link
     otp = OtpObject.objects.create(
@@ -17,9 +17,9 @@ def create_otp_link(instance, file_field: str, quantity: int=1, duration: int=24
         duration=duration,
     )
 
-    return otp.get_absolute_url()
+    return otp
 
-def retrieve_otp_link_instance(otp_object: OtpObject):
+def retrieve_otp_link_instance(otp_object: OtpObject) -> object:
     # check if instance can be retrieved
     if (
         otp_object.quantity < 1 # usage maximum is exceeded
