@@ -8,9 +8,9 @@ name="django-otplink"
 description="Generate one-time or multi-use links with expiry and temporary file management support"
 requires-python = ">= 3.11"
 dependencies = [
-    "django>=4.2",
+    "django~=4.2",
     "django-downloadview",
-    "requests"
+    "requests",
 ]
 authors = [
   {name = "Oguzhan Kaluk", email = "okaluk@bona-fide.it"},
