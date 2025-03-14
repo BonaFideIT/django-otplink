@@ -1,7 +1,7 @@
 from datetime import timedelta
 from django.utils import timezone
 from django.http.response import Http404
-from .models import OtpObject
+from otplink import OtpObject
 
 
 def create_otp_link(instance, file_field: str, quantity: int=1, duration: int=24) -> OtpObject:

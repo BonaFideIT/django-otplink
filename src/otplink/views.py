@@ -1,6 +1,6 @@
 from django_downloadview.views import ObjectDownloadView
 from .functions import retrieve_otp_link_instance
-from .models import OtpObject
+from otplink import OtpObject
 
 
 class OTPDownloadView(ObjectDownloadView):

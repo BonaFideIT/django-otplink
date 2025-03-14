@@ -22,6 +22,6 @@ class OtpObject(models.Model):
         ]
 
     def get_absolute_url(self):
-        return reverse('otp-link', kwargs={'pk': self.pk})
+        return reverse('otp-link', kwargs={'pk': self.pk}) # todo make viewname configurable
 
 

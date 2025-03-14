@@ -7,10 +7,10 @@ from django.http.response import HttpResponse
 
 # models
 from .models import TestClass
-from otplink.models import OtpObject
+from otplink import OtpObject
 
 # functions
-from otplink.functions import create_otp_link
+from otplink import create_otp_link
 
 
 @admin.register(TestClass)
