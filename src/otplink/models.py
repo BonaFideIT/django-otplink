@@ -3,6 +3,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.urls import reverse
+from django.conf import settings
 
 
 class OtpObject(models.Model):
@@ -22,6 +23,10 @@ class OtpObject(models.Model):
         ]
 
     def get_absolute_url(self):
-        return reverse('otp-link', kwargs={'pk': self.pk}) # todo make viewname configurable
+        viewname = 'otp-link'
+        if hasattr(settings, "OTPLINK_VIEW"):
+            viewname = settings.OTPLINK_VIEW
+
+        return reverse(viewname, kwargs={'pk': self.pk})
 
 

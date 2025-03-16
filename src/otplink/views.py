@@ -1,6 +1,6 @@
 from django_downloadview.views import ObjectDownloadView
 from .functions import retrieve_otp_link_instance
-from otplink import OtpObject
+from .models import OtpObject
 
 
 class OTPDownloadView(ObjectDownloadView):
@@ -14,7 +14,7 @@ class OTPDownloadView(ObjectDownloadView):
         obj = super().get_object(queryset)
 
         # overwrite ObjectDownloadView attributes from OtpObject
-        # todo: extend with other attributes configurable in ObjectDownloadView
+        # optional: extend with other attributes configurable in ObjectDownloadView
         self.file_field = obj.file_field
 
         # return instance of model specified in OtpObject
