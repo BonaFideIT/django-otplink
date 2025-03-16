@@ -7,21 +7,34 @@ from django.http.response import HttpResponse
 
 # models
 from .models import TestClass
-from otplink import OtpObject
+from otplink.models import OtpObject
 
 # functions
-from otplink import create_otp_link
+from otplink.functions import create_otp_link
 
 
 @admin.register(TestClass)
 class TestClassAdmin(admin.ModelAdmin):
-    list_display = ('name', 'file', 'otp_links', 'add_otp_link')
-    readonly_fields = ('otp_links','add_otp_link',)
+
+    def get_fields(self, request, obj=None):
+        if obj is None:  # create form
+            return 'name', 'file'
+        else:  # update form
+            return 'name', 'file', 'otp_links', 'add_otp_link'
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj is None:
+            # For a new object, none of these fields should appear,
+            # so returning an empty tuple is safe.
+            return ()
+        else:
+            # For an existing object, make those fields read-only.
+            return 'otp_links', 'add_otp_link'
 
     def get_urls(self):
         urls = super().get_urls()
         my_urls = [
-            path('create-otp-link/<int:pk>/<int:quantity>/<int:duration>/', self.create_otp_link, name='create_otp_link'),
+            path('create-otp-link/<int:pk>/', self.create_otp_link, name='create_otp_link'),
         ]
         return my_urls + urls
 
@@ -37,6 +50,6 @@ class TestClassAdmin(admin.ModelAdmin):
 
 
     def add_otp_link(self, obj):
-        return format_html('<a href="{}">Generate otp link</a>', reverse('admin:create_otp_link', args=[obj.pk]))
+        return format_html('<a href="{}" target="_blank">Generate otp link</a>', reverse('admin:create_otp_link', args=[obj.pk]))
 
 

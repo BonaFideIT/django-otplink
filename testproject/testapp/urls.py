@@ -1,6 +1,6 @@
 from django.urls import path
-from otplink import OTPDownloadView
+from otplink.views import OTPDownloadView
 
 urlpatterns = [
-    path('otp-link/<uuid:pk>/', OTPDownloadView.as_view(), name='otp-link'),
+    path('otp-link/<uuid:pk>/', OTPDownloadView.as_view(), name='download-otp-link'),
 ]
