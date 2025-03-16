@@ -8,13 +8,21 @@ from django.conf import settings
 
 class OtpObject(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey("content_type", "object_id")
-    file_field = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
     quantity = models.IntegerField(default=1)
     duration = models.IntegerField(default=24)
-    created_at = models.DateTimeField(auto_now_add=True)
+
+    object_id = models.PositiveIntegerField()
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    content_object = GenericForeignKey("content_type", "object_id")
+
+    file_field = models.CharField(max_length=100)
+    basename_field = models.CharField(max_length=100, blank=True, null=True, default= None)
+    encoding_field = models.CharField(max_length=100, blank=True, null=True, default= None)
+    mime_type_field = models.CharField(max_length=100, blank=True, null=True, default= None)
+    charset_field = models.CharField(max_length=100, blank=True, null=True, default= None)
+    modification_time_field = models.CharField(max_length=100, blank=True, null=True, default= None)
+    size_field = models.CharField(max_length=100, blank=True, null=True, default= None)
 
     class Meta:
         app_label = 'otplink'
@@ -23,7 +31,7 @@ class OtpObject(models.Model):
         ]
 
     def get_absolute_url(self):
-        viewname = 'otp-link'
+        viewname = 'otp_link'
         if hasattr(settings, "OTPLINK_VIEW"):
             viewname = settings.OTPLINK_VIEW
 

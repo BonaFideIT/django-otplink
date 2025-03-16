@@ -16,6 +16,7 @@ The package will be available on PyPI and can be installed using pip:
     OTPLINK_VIEW = 'example_view'
     ```
     The `OTPLINK_VIEW` is the reverse-name of the view that will be used to reverse the one-time link.
+    If not configured, the default reverse-name is `otp_link`.
 3. import the generate_otp_link function and use it to generate one-time links. It returns an OtpObject object.
     ```python
     from otplink.functions import generate_otp_link
