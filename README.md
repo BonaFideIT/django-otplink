@@ -1,7 +1,8 @@
 # django-otp-link
-Generate one-time or multi-use links with expiry and temporary file management support.
+Generate one-time or multi-use links with expiry for file fields in Django models or files in Django storage.
 
-- [ ] Temporary file management
+- [ ] fileobject inside OtpObject
+- [ ] OtpObject clean method to only have contentobject or fileobject
 
 ## Installation
 The package will be available on PyPI and can be installed using pip:
