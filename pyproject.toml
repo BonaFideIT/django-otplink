@@ -37,4 +37,4 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://bona-fide.it/"
+Homepage = "https://github.com/BonaFideIT/django-otplink/"
