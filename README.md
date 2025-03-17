@@ -4,6 +4,7 @@ Generate one-time or multi-use links with expiry for file fields in Django model
 ### current Todos:
 - [ ] make fileobject storage path configurable
 - [ ] test new clean function inside model
+- [ ] update testapp for new structure
 
 ## Installation
 The package will be available on PyPI and can be installed using pip:
