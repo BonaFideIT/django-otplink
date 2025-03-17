@@ -9,9 +9,6 @@ from django.http.response import HttpResponse
 from .models import TestClass
 from otplink.models import OtpObject
 
-# functions
-from otplink.functions import create_otp_link
-
 
 @admin.register(TestClass)
 class TestClassAdmin(admin.ModelAdmin):
@@ -40,7 +37,12 @@ class TestClassAdmin(admin.ModelAdmin):
 
     def create_otp_link(self, request, pk, quantity=1, duration=24):
         obj = TestClass.objects.get(pk=pk)
-        create_otp_link(obj, 'file', quantity, duration)
+        OtpObject.objects.create(
+            quantity=quantity,
+            duration=duration,
+            content_object=obj,
+            file_field="file",
+        )
 
         return HttpResponse()
 
